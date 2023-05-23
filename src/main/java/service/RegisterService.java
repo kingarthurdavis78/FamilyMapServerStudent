@@ -1,5 +1,7 @@
 package service;
 
+import result.ResisterResponse;
+
 /**
  * RegisterService Object
  */
@@ -7,8 +9,8 @@ public class RegisterService {
     /**
      * The RegisterService constructor
      */
-    public RegisterService() {
-
+    public ResisterResponse RegisterService() {
+        return null;
     }
 
     /**

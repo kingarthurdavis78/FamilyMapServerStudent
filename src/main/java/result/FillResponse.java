@@ -3,7 +3,7 @@ package result;
 /**
  * This class is used to create a response for the fill service.
  */
-public class fillResponse {
+public class FillResponse {
     /**
      * This is the message.
      */
@@ -14,11 +14,11 @@ public class fillResponse {
     Boolean success;
 
     /**
-     * This is the constructor for the fillResponse class.
+     * This is the constructor for the FillResponse class.
      * @param message
      * @param success
      */
-    public fillResponse(String message, Boolean success) {
+    public FillResponse(String message, Boolean success) {
         this.message = message;
         this.success = success;
     }

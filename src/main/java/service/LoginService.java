@@ -1,5 +1,7 @@
 package service;
 
+import result.LoginResponse;
+
 /**
  * LoginService Object
  */
@@ -7,8 +9,8 @@ public class LoginService {
     /**
      * The LoginService constructor
      */
-    public LoginService() {
-
+    public LoginResponse LoginService() {
+        return null;
     }
 
     /**

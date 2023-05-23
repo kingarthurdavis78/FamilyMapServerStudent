@@ -8,6 +8,13 @@ import model.User;
 public class UserAccess extends DatabaseAccess{
 
     /**
+     * This method is used to clear the User table in the database.
+     */
+    public void clearUser() {
+
+    }
+
+    /**
      * This method is used to add a User to the database.
      */
     public void addUserAccess(User user) {
@@ -17,8 +24,8 @@ public class UserAccess extends DatabaseAccess{
     /**
      * This method is used to get a User from the database.
      */
-    public void getUserAccess(String username) {
-
+    public User getUserAccess(String username) {
+        return null;
     }
 
     /**

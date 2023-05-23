@@ -3,7 +3,7 @@ package result;
 /**
  * This class is used to create a response for the login service.
  */
-public class LoginResponseSuccess {
+public class LoginResponse {
     /**
      * This is the authtoken.
      */
@@ -25,13 +25,13 @@ public class LoginResponseSuccess {
     Boolean success;
 
     /**
-     * This is the constructor for the LoginResponseSuccess class.
+     * This is the constructor for the LoginResponse class.
      * @param authtoken
      * @param username
      * @param personID
      * @param success
      */
-    public LoginResponseSuccess(String authtoken, String username, String personID, Boolean success) {
+    public LoginResponse(String authtoken, String username, String personID, Boolean success) {
         this.authtoken = authtoken;
         this.username = username;
         this.personID = personID;

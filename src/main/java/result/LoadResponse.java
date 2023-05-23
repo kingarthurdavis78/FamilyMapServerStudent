@@ -3,7 +3,7 @@ package result;
 /**
  * This class is used to create a response for the load service.
  */
-public class loadResponse {
+public class LoadResponse {
     /**
      * This is the message.
      */
@@ -15,11 +15,11 @@ public class loadResponse {
     Boolean success;
 
     /**
-     * This is the constructor for the loadResponse class.
+     * This is the constructor for the LoadResponse class.
      * @param message
      * @param success
      */
-    public loadResponse(String message, Boolean success) {
+    public LoadResponse(String message, Boolean success) {
         this.message = message;
         this.success = success;
     }

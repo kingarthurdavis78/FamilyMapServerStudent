@@ -8,6 +8,13 @@ import model.Event;
 public class EventAccess extends DatabaseAccess {
 
     /**
+     * This method is used to clear the Event table in the database.
+     */
+    public void clearEventAccess() {
+
+    }
+
+    /**
      * This method is used to add an Event to the database.
      */
     public void addEventAccess(Event event) {
@@ -17,8 +24,8 @@ public class EventAccess extends DatabaseAccess {
     /**
      * This method is used to get an Event from the database.
      */
-    public void getEventAccess(String eventID) {
-
+    public Event getEventAccess(String eventID) {
+        return null;
     }
 
     /**

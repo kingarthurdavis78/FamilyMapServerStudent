@@ -10,7 +10,7 @@ public class AuthTokenAccess  extends DatabaseAccess{
     /**
      * This method is used to clear the AuthToken table in the database.
      */
-    public void clearAuthToken(Authtoken authtoken) {
+    public void clearAuthToken() {
 
     }
 
@@ -24,8 +24,8 @@ public class AuthTokenAccess  extends DatabaseAccess{
     /**
      * This method is used to get an AuthToken from the database.
      */
-    public void getAuthToken(String authtoken) {
-
+    public Authtoken getAuthToken(String authtoken) {
+        return null;
     }
 
     /**

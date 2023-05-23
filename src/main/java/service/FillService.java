@@ -1,5 +1,7 @@
 package service;
 
+import result.FillResponse;
+
 /**
  * FillService Object
  */
@@ -14,7 +16,7 @@ public class FillService {
     /**
      * The fill method
      */
-    public void fill() {
-
+    public FillResponse fill(String username, int numGenerations) {
+        return null;
     }
 }

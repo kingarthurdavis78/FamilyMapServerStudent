@@ -1,5 +1,7 @@
 package service;
 
+import result.ClearResponse;
+
 /**
  * ClearService Object
  */
@@ -7,8 +9,8 @@ public class ClearService {
     /**
      * The ClearService constructor
      */
-    public ClearService() {
-
+    public ClearResponse ClearService() {
+        return null;
     }
 
     /**

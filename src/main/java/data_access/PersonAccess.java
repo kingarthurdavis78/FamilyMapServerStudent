@@ -8,6 +8,13 @@ import model.Person;
 public class PersonAccess extends DatabaseAccess {
 
     /**
+     * This method is used to clear the Person table in the database.
+     */
+    public void clearPerson() {
+
+    }
+
+    /**
      * This method is used to add a Person to the database.
      */
     public void addPersonAccess(Person person) {
@@ -16,8 +23,8 @@ public class PersonAccess extends DatabaseAccess {
     /**
      * This method is used to get a Person from the database.
      */
-    public void getPersonAccess(String personID ) {
-
+    public Person getPersonAccess(String personID ) {
+        return null;
     }
 
     /**
