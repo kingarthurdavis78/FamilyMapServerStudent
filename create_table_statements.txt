@@ -1,10 +1,10 @@
-drop table if exists User;
-drop table if exists Person;
-drop table if exists Event;
-drop table if exists AuthToken;
+drop table if exists Users;
+drop table if exists Persons;
+drop table if exists Events;
+drop table if exists AuthTokens;
 
 
-CREATE TABLE User (
+CREATE TABLE Users (
     username varchar(255) not null,
     password varchar(255) not null,
     email varchar(255) not null primary key,
@@ -15,7 +15,7 @@ CREATE TABLE User (
  );
 
 
-CREATE TABLE Person (
+CREATE TABLE Persons (
     personID varchar(255) not null primary key,
     associatedUsername varchar(255) not null,
     firstName varchar(255) not null,
@@ -27,7 +27,7 @@ CREATE TABLE Person (
 );
 
 
-CREATE TABLE Event (
+CREATE TABLE Events (
     eventID varchar(255) not null primary key,
     associatedUsername varchar(255) not null,
     personID varchar(255) not null,
@@ -40,7 +40,7 @@ CREATE TABLE Event (
 );
 
 
-CREATE TABLE Authtoken (
+CREATE TABLE Authtokens (
     authtoken varchar(255) not null primary key,
     username varchar(255) not null,
 );

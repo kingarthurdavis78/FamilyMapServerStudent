@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Objects;
+
 /**
  * A User
  */
@@ -37,7 +39,13 @@ public class User {
      * The User constructor
      */
     public User(String username, String password, String email, String firstName, String lastName, String gender, String personID) {
-
+        setUsername(username);
+        setPassword(password);
+        setEmail(email);
+        setFirstName(firstName);
+        setLastName(lastName);
+        setGender(gender);
+        setPersonID(personID);
     }
 
     public String getUsername() {
@@ -94,5 +102,19 @@ public class User {
 
     public void setPersonID(String personID) {
         this.personID = personID;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {return false;}
+
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof User)){
+            return false;
+        }
+        User user = (User)obj;
+        return getUsername().equals(user.getUsername()) && getPassword().equals(user.getPassword()) && getEmail().equals(user.getEmail()) && getFirstName().equals(user.getFirstName()) && getLastName().equals(user.getLastName()) && getGender().equals(user.getGender()) && getPersonID().equals(user.getPersonID());
     }
 }

@@ -22,12 +22,12 @@ public class Event {
     /**
      * The Event's Latitude
      */
-    private String latitude;
+    private float latitude;
 
     /**
      * The Event's Longitude
      */
-    private String longitude;
+    private float longitude;
 
     /**
      * The Event's Country
@@ -47,13 +47,21 @@ public class Event {
     /**
      * The Event's Year
      */
-    private String year;
+    private int year;
 
     /**
      * The Event constructor
      */
-    public Event(String eventID, String associatedUsername, String personID, String latitude, String longitude, String country, String city, String eventType, String year) {
-
+    public Event(String eventID, String associatedUsername, String personID, float latitude, float longitude, String country, String city, String eventType, int year) {
+        setEventID(eventID);
+        setAssociatedUsername(associatedUsername);
+        setPersonID(personID);
+        setLatitude(latitude);
+        setLongitude(longitude);
+        setCountry(country);
+        setCity(city);
+        setEventType(eventType);
+        setYear(year);
     }
 
     public String getEventID() {
@@ -80,19 +88,19 @@ public class Event {
         this.personID = personID;
     }
 
-    public String getLatitude() {
+    public float getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(String latitude) {
+    public void setLatitude(float latitude) {
         this.latitude = latitude;
     }
 
-    public String getLongitude() {
+    public float getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(String longitude) {
+    public void setLongitude(float longitude) {
         this.longitude = longitude;
     }
 
@@ -120,11 +128,34 @@ public class Event {
         this.eventType = eventType;
     }
 
-    public String getYear() {
+    public int getYear() {
         return year;
     }
 
-    public void setYear(String year) {
+    public void setYear(int year) {
         this.year = year;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+
+        if (obj == null) {return false;}
+
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof Event)){
+            return false;
+        }
+        Event event = (Event) obj;
+        return getEventID().equals(event.getEventID()) &&
+                getAssociatedUsername().equals(event.getAssociatedUsername()) &&
+                getPersonID().equals(event.getPersonID()) &&
+                getLatitude() == event.getLatitude() &&
+                getLongitude() == event.getLongitude() &&
+                getCountry().equals(event.getCountry()) &&
+                getCity().equals(event.getCity()) &&
+                getEventType().equals(event.getEventType()) &&
+                getYear() == event.getYear();
     }
 }

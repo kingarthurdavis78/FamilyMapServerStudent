@@ -1,4 +1,4 @@
-package data_access;
+package dao;
 
 import model.Authtoken;
 

@@ -1,5 +1,7 @@
 package model;
 
+import dao.PersonAccess;
+
 /**
  * A Person
  */
@@ -48,7 +50,16 @@ public class Person {
     /**
      * The Person constructor
      */
-    public Person() {}
+    public Person(String personID, String associatedUsername, String firstName, String lastName, String gender, String fatherID, String motherID, String spouseID) {
+        setPersonID(personID);
+        setAssociatedUsername(associatedUsername);
+        setFirstName(firstName);
+        setLastName(lastName);
+        setGender(gender);
+        setFatherID(fatherID);
+        setMotherID(motherID);
+        setSpouseID(spouseID);
+    }
 
     public String getPersonID() {
         return personID;
@@ -112,5 +123,24 @@ public class Person {
 
     public void setSpouseID(String spouseID) {
         this.spouseID = spouseID;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+
+        if (obj == null) {
+            return false;
+        }
+
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+
+        Person person = (Person) obj;
+
+        return getPersonID().equals(person.getPersonID()) && getAssociatedUsername().equals(person.getAssociatedUsername()) && getFirstName().equals(person.getFirstName()) && getLastName().equals(person.getLastName()) && getGender().equals(person.getGender()) && getFatherID().equals(person.getFatherID()) && getMotherID().equals(person.getMotherID()) && getSpouseID().equals(person.getSpouseID());
     }
 }
