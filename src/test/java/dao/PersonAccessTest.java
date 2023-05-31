@@ -10,14 +10,14 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class PersonAccessTest {
     private PersonAccess pDao;
-    private Person bestEvent;
+    private Person bestPerson;
 
     @BeforeEach
     public void setUp() throws DataAccessException {
         pDao = new PersonAccess();
         pDao.openConnection();
 
-        bestEvent = new Person("123456", "my fake Person", "name", "nameane,e", "f", "543", "456", "null");
+        bestPerson = new Person("123456", "my fake Person", "name", "nameane,e", "f", "543", "456", "null");
 
         pDao.clear();
     }
@@ -29,38 +29,38 @@ public class PersonAccessTest {
 
     @Test
     public void insertPass() throws DataAccessException {
-        pDao.addPerson(bestEvent);
-        Person compareTest = pDao.getPerson(bestEvent.getPersonID());
+        pDao.addPerson(bestPerson);
+        Person compareTest = pDao.getPerson(bestPerson.getPersonID());
         assertNotNull(compareTest);
-        assertEquals(bestEvent, compareTest);
+        assertEquals(bestPerson, compareTest);
     }
 
     @Test
     public void insertFail() throws DataAccessException {
-        pDao.addPerson(bestEvent);
-        assertThrows(DataAccessException.class, () -> pDao.addPerson(bestEvent));
+        pDao.addPerson(bestPerson);
+        assertThrows(DataAccessException.class, () -> pDao.addPerson(bestPerson));
     }
 
     @Test
     public void getPersonPass() throws DataAccessException {
-        pDao.addPerson(bestEvent);
-        Person compareTest = pDao.getPerson(bestEvent.getPersonID());
+        pDao.addPerson(bestPerson);
+        Person compareTest = pDao.getPerson(bestPerson.getPersonID());
         assertNotNull(compareTest);
-        assertEquals(bestEvent, compareTest);
+        assertEquals(bestPerson, compareTest);
     }
 
     @Test
     public void getPersonFail() throws DataAccessException {
-        pDao.addPerson(bestEvent);
-        Person compareTest = pDao.getPerson("fake Personname");
+        pDao.addPerson(bestPerson);
+        Person compareTest = pDao.getPerson("fake Person name");
         assertNull(compareTest);
     }
 
     @Test
     public void clearPersonTable() throws DataAccessException {
-        pDao.addPerson(bestEvent);
+        pDao.addPerson(bestPerson);
         pDao.clearPersonTable();
-        Person compareTest = pDao.getPerson(bestEvent.getPersonID());
+        Person compareTest = pDao.getPerson(bestPerson.getPersonID());
         assertNull(compareTest);
     }
 }
