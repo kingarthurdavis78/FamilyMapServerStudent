@@ -2,6 +2,7 @@ package dao;
 
 import model.User;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -44,7 +45,7 @@ public class UserAccess extends DatabaseAccess{
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new DataAccessException("Error encountered while inserting an User into the database");
+            throw new DataAccessException("Error encountered while inserting into the database");
         }
 
     }
@@ -83,5 +84,9 @@ public class UserAccess extends DatabaseAccess{
      * UserAccess constructor.
      */
     public UserAccess() {
+    }
+
+    public UserAccess(Connection conn) {
+        super(conn);
     }
 }

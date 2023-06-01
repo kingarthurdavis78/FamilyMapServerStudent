@@ -1,8 +1,12 @@
 package dao;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.Scanner;
 
 /**
  * This class is used to access the database.
@@ -25,9 +29,9 @@ public class DatabaseAccess {
 
             // Open a database connection to the file given in the path
             conn = DriverManager.getConnection(CONNECTION_URL);
-
             // Start a transaction
             conn.setAutoCommit(false);
+
         } catch (SQLException e) {
             e.printStackTrace();
             throw new DataAccessException("Unable to open connection to database");
@@ -53,15 +57,44 @@ public class DatabaseAccess {
         }
     }
 
+    private String opentext(String textFile) {
+        try {
+            StringBuilder sql = new StringBuilder();
+            File file = new File(textFile);
+            Scanner scanner = new Scanner(file);
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                sql.append(line);
+            }
+            scanner.close();
+            return sql.toString();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     /**
      * This method is used to clear the database.
      */
-    public void clear() {}
+    public void clear() throws DataAccessException {
+        String sql = "DELETE FROM AuthTokens;DELETE FROM Events;DELETE FROM Persons;DELETE FROM Users;";
+        try (PreparedStatement stmt = getConn().prepareStatement(sql)) {
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new DataAccessException(e.getMessage());
+        }
+    }
 
     /**
      * DatabaseAccess constructor.
      */
     public DatabaseAccess() {
+    }
+
+    public DatabaseAccess(Connection conn) {
+        this.conn = conn;
     }
 
     /**

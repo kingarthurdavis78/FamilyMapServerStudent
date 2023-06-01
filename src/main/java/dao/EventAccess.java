@@ -12,13 +12,13 @@ public class EventAccess extends DatabaseAccess {
     /**
      * This method is used to clear the Event table in the database.
      */
-    public void clearEvent() throws DataAccessException {
+    public void clearEventTable() throws DataAccessException {
         String sql = "DELETE FROM Events";
         try (PreparedStatement stmt = super.getConn().prepareStatement(sql)) {
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new DataAccessException("Error encountered while clearing the event table");
+            throw new DataAccessException(e.getMessage());
         }
     }
 
@@ -83,7 +83,7 @@ public class EventAccess extends DatabaseAccess {
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new DataAccessException("Error encountered while clearing the event table");
+            throw new DataAccessException(e.getMessage());
         }
     }
 
@@ -93,4 +93,13 @@ public class EventAccess extends DatabaseAccess {
      */
     public EventAccess() {
     }
+
+    /**
+     * EventAccess constructor.
+     */
+    public EventAccess(Connection conn) {
+        super(conn);
+    }
+
+
 }

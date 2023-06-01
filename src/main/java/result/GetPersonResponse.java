@@ -57,16 +57,16 @@ public class GetPersonResponse {
     /**
      * The GetPersonResponse constructor
      */
-    public GetPersonResponse(String username, String personID, String firstName, String lastName, String gender) {
+    public GetPersonResponse(String username, String personID, String firstName, String lastName, String gender, boolean success) {
         this.associatedUsername = username;
         this.personID = personID;
         this.firstName = firstName;
         this.lastName = lastName;
         this.gender = gender;
-        this.success = true;
+        this.success = success;
     }
 
-    public GetPersonResponse(String username, String personID, String firstName, String lastName, String gender, String fatherID, String motherID, String spouseID) {
+    public GetPersonResponse(String username, String personID, String firstName, String lastName, String gender, String fatherID, String motherID, String spouseID, boolean success) {
         this.associatedUsername = username;
         this.personID = personID;
         this.firstName = firstName;
@@ -75,12 +75,12 @@ public class GetPersonResponse {
         this.fatherID = fatherID;
         this.motherID = motherID;
         this.spouseID = spouseID;
-        this.success = true;
+        this.success = success;
     }
 
-    public GetPersonResponse(String message) {
+    public GetPersonResponse(String message, Boolean success) {
         this.message = message;
-        this.success = false;
+        this.success = success;
     }
 
 }

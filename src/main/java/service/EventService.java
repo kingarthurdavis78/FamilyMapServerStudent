@@ -14,9 +14,4 @@ public class EventService {
         return null;
     }
 
-    /**
-     * The EventService constructor
-     */
-    public EventService() {
-    }
 }
