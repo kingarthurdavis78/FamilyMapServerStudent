@@ -24,7 +24,7 @@ public class LoginService {
             userAccess.closeConnection(false);
 
             if (user == null) {
-                return new LoginResponse("Error: Invalid username", false);
+                return new LoginResponse("Error: No user found", false);
             }
 
             if (!user.getPassword().equals(request.getPassword())) {
