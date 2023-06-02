@@ -23,7 +23,7 @@ public class UserAccessTest {
         bestUser = new User("my fake username", "my fake password", "my fake email62", "John", "Doe", "m", "12345");
 
         //Let's clear the database as well so any lingering data doesn't affect our tests
-        uDao.clear();
+        uDao.clearUserTable();
     }
 
     @AfterEach
