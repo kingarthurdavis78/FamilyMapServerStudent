@@ -2,6 +2,7 @@ package dao;
 
 import model.Person;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -20,7 +21,7 @@ public class PersonAccess extends DatabaseAccess {
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new DataAccessException("Error encountered while clearing the person table");
+            throw new DataAccessException(e.getMessage());
         }
 
     }
@@ -43,7 +44,7 @@ public class PersonAccess extends DatabaseAccess {
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new DataAccessException("Error encountered while inserting an User into the database");
+            throw new DataAccessException(e.getMessage());
         }
     }
 
@@ -66,7 +67,7 @@ public class PersonAccess extends DatabaseAccess {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new DataAccessException("Error encountered while finding an User in the database");
+            throw new DataAccessException(e.getMessage());
         }
     }
 
@@ -84,4 +85,12 @@ public class PersonAccess extends DatabaseAccess {
     public PersonAccess() {
 
     }
+
+    /**
+     * PersonAccess constructor.
+     */
+    public PersonAccess(Connection conn) {
+        super(conn);
+    }
+
 }

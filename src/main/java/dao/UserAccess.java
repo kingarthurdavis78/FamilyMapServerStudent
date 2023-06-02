@@ -2,6 +2,7 @@ package dao;
 
 import model.User;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -44,7 +45,7 @@ public class UserAccess extends DatabaseAccess{
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new DataAccessException("Error encountered while inserting an User into the database");
+            throw new DataAccessException("Error encountered while inserting into the database");
         }
 
     }
@@ -75,13 +76,24 @@ public class UserAccess extends DatabaseAccess{
     /**
      * This method is used to delete a User from the database.
      */
-    public void deleteUser(User user) {
-
+    public void deleteUser(String username) throws DataAccessException {
+        String sql = "DELETE FROM Users WHERE username = ?";
+        try (PreparedStatement stmt = super.getConn().prepareStatement(sql)) {
+            stmt.setString(1, username);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new DataAccessException("Error encountered while deleting an User in the database");
+        }
     }
 
     /**
      * UserAccess constructor.
      */
     public UserAccess() {
+    }
+
+    public UserAccess(Connection conn) {
+        super(conn);
     }
 }

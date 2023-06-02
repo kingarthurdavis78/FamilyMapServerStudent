@@ -19,7 +19,7 @@ public class PersonAccessTest {
 
         bestPerson = new Person("123456", "my fake Person", "name", "nameane,e", "f", "543", "456", "null");
 
-        pDao.clear();
+        pDao.clearPersonTable();
     }
 
     @AfterEach
