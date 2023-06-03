@@ -2,10 +2,7 @@ import java.io.*;
 import java.net.*;
 
 import com.sun.net.httpserver.*;
-import handlers.ClearHandler;
-import handlers.LoadHandler;
-import handlers.LoginHandler;
-import handlers.FileHandler;
+import handlers.*;
 
 public class Server {
     private static final int MAX_WAITING_CONNECTIONS = 12;
@@ -37,10 +34,10 @@ public class Server {
         server.createContext("/clear", new ClearHandler());
 
 //        server.createContext("/fill/[username]/{generations}", new FillHandler());
-//
+
         server.createContext("/load", new LoadHandler());
-//
-//        server.createContext("/person/[personID]", new PersonHandler());
+
+        server.createContext("/person", new PersonHandler());
 //
 //        server.createContext("/event/[eventID]", new EventHandler());
 

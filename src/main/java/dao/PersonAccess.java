@@ -72,10 +72,24 @@ public class PersonAccess extends DatabaseAccess {
     }
 
     /**
-     * This method is used to delete a Person from the database.
+     * This method is used to get all people associated with a user from the database.
      */
-    public void deletePersonAccess(Person person) {
-
+    public Person[] getFamily(String username) throws DataAccessException{
+        String sql = "SELECT * FROM Persons WHERE AssociatedUsername = ?;";
+        try (PreparedStatement stmt = super.getConn().prepareStatement(sql)) {
+            stmt.setString(1, username);
+            ResultSet rs = stmt.executeQuery();
+            Person[] family = new Person[2];
+            int i = 0;
+            while (rs.next()) {
+                family[i] = new Person(rs.getString(1), rs.getString(2), rs.getString(3),
+                        rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8));
+                i++;
+            }
+            return family;
+        } catch (SQLException e) {
+            throw new DataAccessException(e.getMessage());
+        }
     }
 
 
