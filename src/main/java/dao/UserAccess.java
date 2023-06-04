@@ -45,7 +45,7 @@ public class UserAccess extends DatabaseAccess{
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new DataAccessException("Error encountered while inserting into the database");
+            throw new DataAccessException(e.getMessage());
         }
 
     }

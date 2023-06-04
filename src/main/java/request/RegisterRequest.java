@@ -1,5 +1,7 @@
 package request;
 
+import model.User;
+
 /**
  * RegisterRequest
  */
@@ -37,7 +39,13 @@ public class RegisterRequest {
     /**
      * Constructor
      */
-    public RegisterRequest() {
+    public RegisterRequest(User user) {
+        setUsername(user.getUsername());
+        setPassword(user.getPassword());
+        setEmail(user.getEmail());
+        setFirstName(user.getFirstName());
+        setLastName(user.getLastName());
+        setGender(user.getGender());
     }
 
     public String getUsername() {

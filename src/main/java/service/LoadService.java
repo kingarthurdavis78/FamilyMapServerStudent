@@ -22,7 +22,7 @@ public class LoadService {
         ClearService clearService = new ClearService();
         ClearResponse clearResponse = clearService.clear();
         if (!clearResponse.getSuccess()) {
-            return new LoadResponse("Error: " + clearResponse.getMessage(), false);
+            return new LoadResponse(clearResponse.getMessage(), false);
         }
 
         try {
@@ -54,7 +54,7 @@ public class LoadService {
 
             return new LoadResponse("Successfully added " + request.getUsers().length + " users, " + request.getPersons().length + " persons, and " + request.getEvents().length + " events to the database.", true);
         } catch (DataAccessException ex) {
-            return new LoadResponse("Error: " + ex.getMessage(), false);
+            return new LoadResponse(ex.getMessage(), false);
         }
 
     }

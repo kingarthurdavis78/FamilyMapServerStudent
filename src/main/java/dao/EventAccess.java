@@ -75,6 +75,32 @@ public class EventAccess extends DatabaseAccess {
     }
 
     /**
+     * This method is used to get all Events associated with the given user from the database.
+     */
+    public Event[] getAllEvents(String username) throws DataAccessException {
+        Event[] events;
+        ResultSet rs;
+        String sql = "SELECT * FROM Events WHERE AssociatedUsername = ?;";
+        try (PreparedStatement stmt = super.getConn().prepareStatement(sql)) {
+            stmt.setString(1, username);
+            rs = stmt.executeQuery();
+            events = new Event[2];
+            int i = 0;
+            while (rs.next()) {
+                events[i] = new Event(rs.getString("EventID"), rs.getString("AssociatedUsername"),
+                        rs.getString("PersonID"), rs.getFloat("Latitude"), rs.getFloat("Longitude"),
+                        rs.getString("Country"), rs.getString("City"), rs.getString("EventType"),
+                        rs.getInt("Year"));
+                i++;
+            }
+            return events;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new DataAccessException("Error encountered while finding events in the database");
+        }
+    }
+
+    /**
      * This method is used to delete an Event from the database.
      */
     public void deleteEventAccess(Event event) throws DataAccessException{
