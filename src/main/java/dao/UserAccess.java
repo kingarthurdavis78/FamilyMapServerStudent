@@ -45,7 +45,7 @@ public class UserAccess extends DatabaseAccess{
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new DataAccessException(e.getMessage());
+            throw new DataAccessException("Failed to add user into the database");
         }
 
     }

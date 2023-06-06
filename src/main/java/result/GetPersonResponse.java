@@ -1,5 +1,7 @@
 package result;
 
+import model.Person;
+
 /**
  * GetPersonResponse Object
  */
@@ -161,5 +163,9 @@ public class GetPersonResponse {
 
     public void setSuccess(Boolean success) {
         this.success = success;
+    }
+
+    public Person toPerson() {
+        return new Person(personID, associatedUsername, firstName, lastName, gender, fatherID, motherID, spouseID);
     }
 }

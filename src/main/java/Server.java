@@ -33,7 +33,7 @@ public class Server {
 
         server.createContext("/clear", new ClearHandler());
 
-//        server.createContext("/fill/[username]/{generations}", new FillHandler());
+        server.createContext("/fill/", new FillHandler());
 
         server.createContext("/load", new LoadHandler());
 

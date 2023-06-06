@@ -2,6 +2,8 @@ package dao;
 
 import model.Event;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -55,15 +57,14 @@ public class EventAccess extends DatabaseAccess {
     public Event getEvent(String eventID) throws DataAccessException{
         Event event;
         ResultSet rs;
-        String sql = "SELECT * FROM Events WHERE EventID = ?;";
+        String sql = "SELECT * FROM Events WHERE eventID = ?;";
         try (PreparedStatement stmt = super.getConn().prepareStatement(sql)) {
             stmt.setString(1, eventID);
             rs = stmt.executeQuery();
             if (rs.next()) {
-                event = new Event(rs.getString("EventID"), rs.getString("AssociatedUsername"),
-                        rs.getString("PersonID"), rs.getFloat("Latitude"), rs.getFloat("Longitude"),
-                        rs.getString("Country"), rs.getString("City"), rs.getString("EventType"),
-                        rs.getInt("Year"));
+                event = new Event(rs.getString(1), rs.getString(2), rs.getString(3),
+                        rs.getFloat(4), rs.getFloat(5), rs.getString(6), rs.getString(7),
+                        rs.getString(8), rs.getInt(9));
                 return event;
             } else {
                 return null;
@@ -78,22 +79,19 @@ public class EventAccess extends DatabaseAccess {
      * This method is used to get all Events associated with the given user from the database.
      */
     public Event[] getAllEvents(String username) throws DataAccessException {
-        Event[] events;
         ResultSet rs;
         String sql = "SELECT * FROM Events WHERE AssociatedUsername = ?;";
         try (PreparedStatement stmt = super.getConn().prepareStatement(sql)) {
             stmt.setString(1, username);
             rs = stmt.executeQuery();
-            events = new Event[2];
-            int i = 0;
+            List<Event> events = new ArrayList<>();
             while (rs.next()) {
-                events[i] = new Event(rs.getString("EventID"), rs.getString("AssociatedUsername"),
+                events.add(new Event(rs.getString("EventID"), rs.getString("AssociatedUsername"),
                         rs.getString("PersonID"), rs.getFloat("Latitude"), rs.getFloat("Longitude"),
                         rs.getString("Country"), rs.getString("City"), rs.getString("EventType"),
-                        rs.getInt("Year"));
-                i++;
+                        rs.getInt("Year")));
             }
-            return events;
+            return events.toArray(new Event[0]);
         } catch (SQLException e) {
             e.printStackTrace();
             throw new DataAccessException("Error encountered while finding events in the database");
@@ -106,6 +104,20 @@ public class EventAccess extends DatabaseAccess {
     public void deleteEventAccess(Event event) throws DataAccessException{
         String sql = "DELETE * FROM Events WHERE EventID = ?;";
         try (PreparedStatement stmt = super.getConn().prepareStatement(sql)) {
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new DataAccessException(e.getMessage());
+        }
+    }
+
+    /**
+     * This method is used to delete all Events associated with the given user from the database.
+     */
+    public void deleteFamilyEvents(String username) throws DataAccessException{
+        String sql = "DELETE FROM Events WHERE AssociatedUsername = ?;";
+        try (PreparedStatement stmt = super.getConn().prepareStatement(sql)) {
+            stmt.setString(1, username);
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

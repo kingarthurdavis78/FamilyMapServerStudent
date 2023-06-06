@@ -31,7 +31,7 @@ public class EventService {
             return new GetEventResponse(event);
 
         } catch (DataAccessException ex) {
-            return new GetEventResponse("Error: " + ex.getMessage());
+            return new GetEventResponse(ex.getMessage());
         }
     }
     
@@ -45,8 +45,8 @@ public class EventService {
             Event[] events = eDao.getAllEvents(username);
             eDao.closeConnection(true);
 
-            if (events == null) {
-                throw new DataAccessException("Error: No family members found");
+            if (events.length == 0) {
+                throw new DataAccessException("No family members found");
             }
 
             return new GetEventsResponse(events);

@@ -1,7 +1,5 @@
 package model;
 
-import dao.PersonAccess;
-
 /**
  * A Person
  */

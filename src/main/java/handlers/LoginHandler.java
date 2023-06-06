@@ -48,7 +48,6 @@ public class LoginHandler implements HttpHandler {
         //		in an HTTP response
         // 5. How to check an incoming HTTP request for an auth token
 
-        boolean success = false;
 
         try {
             // Determine the HTTP request type (GET, POST, etc.).
@@ -74,34 +73,22 @@ public class LoginHandler implements HttpHandler {
                 LoginResponse result = service.login(request);
 
                 String jsonStr = gson.toJson(result);
-                exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
-
+                System.out.println(jsonStr);
+                if (result.getSuccess()) {
+                    exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
+                } else {
+                    exchange.sendResponseHeaders(HttpURLConnection.HTTP_BAD_REQUEST, 0);
+                }
                 writeString(jsonStr, exchange.getResponseBody());
                 exchange.getResponseBody().close();
-
-                success = true;
-
-                if (!success) {
-                    exchange.sendResponseHeaders(HttpURLConnection.HTTP_BAD_REQUEST, 0);
-
-                    // We are not sending a response body, so close the response body
-                    // output stream, indicating that the response is complete.
-                    exchange.getResponseBody().close();
-                }
 
             }
         }
         catch (IOException e) {
-            // Some kind of internal error has occurred inside the server (not the
-            // client's fault), so we return an "internal server error" status code
-            // to the client.
-            exchange.sendResponseHeaders(HttpURLConnection.HTTP_SERVER_ERROR, 0);
+            exchange.sendResponseHeaders(HttpURLConnection.HTTP_BAD_REQUEST, 0);
 
-            // We are not sending a response body, so close the response body
-            // output stream, indicating that the response is complete.
             exchange.getResponseBody().close();
 
-            // Display/log the stack trace
             e.printStackTrace();
         }
     }

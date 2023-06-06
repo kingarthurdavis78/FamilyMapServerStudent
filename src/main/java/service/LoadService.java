@@ -1,6 +1,7 @@
 package service;
 
 import dao.*;
+import model.User;
 import request.LoadRequest;
 import result.ClearResponse;
 import result.LoadResponse;
@@ -33,7 +34,12 @@ public class LoadService {
 
             // Add Users
             UserAccess userAccess = new UserAccess(conn);
-            for (int i = 0; i < request.getUsers().length; i++) {
+            User[] users = request.getUsers();
+            if (users == null) {
+                db.closeConnection(false);
+                return new LoadResponse("Error: Invalid request data", false);
+            }
+            for (int i = 0; i < users.length; i++) {
                 userAccess.addUser(request.getUsers()[i]);
             }
 

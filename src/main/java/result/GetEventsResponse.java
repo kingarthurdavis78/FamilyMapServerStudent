@@ -59,4 +59,5 @@ public class GetEventsResponse {
     public void setSuccess(Boolean success) {
         this.success = success;
     }
+
 }

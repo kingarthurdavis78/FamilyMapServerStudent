@@ -415,6 +415,8 @@ public class ServerTest {
             //Checks to make sure eventResult has information for an Event [OR] in the case that there isn't, that there is no error message String
             Assertions.assertTrue(eventResult.getMessage() == null || !eventResult.getMessage().toLowerCase().contains("error"), "Result contains an error message");
             //Checks to make sure eventResult has the same information for the "Sheila_Asteroids" Event as it is listed in loadRequest
+            System.out.println(loadRequest.getEvent(ASTEROIDS1_EVENT_ID).getAssociatedUsername());
+            System.out.println(eventResult.toEvent().getAssociatedUsername());
             assertEquals(loadRequest.getEvent(ASTEROIDS1_EVENT_ID), eventResult.toEvent(), "Event returned does not match event from LoadRequest");
             //We are calling the get single event api with an eventID of "Other_Asteroids" (we are using the authtoken variable from the same loginResult)
             eventResult = proxy.event(host, port, loginResult.getAuthtoken(), ASTEROIDS2_EVENT_ID);
@@ -685,7 +687,7 @@ public class ServerTest {
             assertNotNull(loginResult.getAuthtoken(), "authtoken was null OR its variable name did not match that of the expected JSon (see API)");
             //Checks to see if you filled loginResult with an authtoken String
             assertNotEquals(EMPTY_STRING, loginResult.getAuthtoken(), "authtoken was empty string, expected non-empty authtoken string");
-            //We are calling the get all persons api for the user patrick (we are using the authtoken variable from the LoginResult we received a few lines up)
+            //We are calling the get all persons api for the user patrick (we are using the authtoken variable from the LoginResponse we received a few lines up)
             PersonsResult personsResult = proxy.persons(host, port, loginResult.getAuthtoken());
             //Checks to see if the list of people associated with patrick from loadRequest matches the list of people from personsResult
             assertEquals(loadRequest.getPersons(PATRICK.getUsername()), personsResult.getDataAsSet(), "Persons of one user don't match loaded persons after a fill of a different user");

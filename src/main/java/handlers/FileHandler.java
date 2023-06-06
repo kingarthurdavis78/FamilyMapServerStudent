@@ -21,16 +21,16 @@ public class FileHandler  implements HttpHandler {
         String filePath = "web" + url;
 
         File file = new File(filePath);
+        OutputStream respBody = exchange.getResponseBody();
         if (file.exists()) {
             exchange.sendResponseHeaders(200, 0);
-            OutputStream respBody = exchange.getResponseBody();
-            Files.copy(file.toPath(), respBody);
-            exchange.getResponseBody().close();
         }
         else {
             exchange.sendResponseHeaders(404, 0);
-            exchange.getResponseBody().close();
+            file = new File("web/HTML/404.html");
         }
+        Files.copy(file.toPath(), respBody);
+        exchange.getResponseBody().close();
     }
 
 }

@@ -6,6 +6,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * This class is used to access the Person table in the database.
@@ -79,18 +81,27 @@ public class PersonAccess extends DatabaseAccess {
         try (PreparedStatement stmt = super.getConn().prepareStatement(sql)) {
             stmt.setString(1, username);
             ResultSet rs = stmt.executeQuery();
-            Person[] family = new Person[2];
-            int i = 0;
+            List<Person> family = new LinkedList<>();
             while (rs.next()) {
-                family[i] = new Person(rs.getString(1), rs.getString(2), rs.getString(3),
-                        rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8));
-                i++;
+                family.add(new Person(rs.getString(1), rs.getString(2), rs.getString(3),
+                        rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8)));
             }
-            return family;
+            return family.toArray(new Person[0]);
         } catch (SQLException e) {
             throw new DataAccessException(e.getMessage());
         }
     }
+
+    public void deleteFamily(String username) throws DataAccessException{
+        String sql = "DELETE FROM Persons WHERE AssociatedUsername = ?;";
+        try (PreparedStatement stmt = super.getConn().prepareStatement(sql)) {
+            stmt.setString(1, username);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new DataAccessException(e.getMessage());
+        }
+    }
+
 
 
     /**

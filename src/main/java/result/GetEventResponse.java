@@ -5,9 +5,9 @@ import model.Event;
 public class GetEventResponse {
 
     /**
-     * Username string
+     * associatedUsername string
      */
-    String username;
+    String associatedUsername;
 
     /**
      * EventID string
@@ -64,7 +64,7 @@ public class GetEventResponse {
      * @param event
      */
     public GetEventResponse(Event event) {
-        this.username = event.getAssociatedUsername();
+        this.associatedUsername = event.getAssociatedUsername();
         this.eventID = event.getEventID();
         this.personID = event.getPersonID();
         this.latitude = event.getLatitude();
@@ -85,12 +85,16 @@ public class GetEventResponse {
         this.success = false;
     }
 
-    public String getUsername() {
-        return username;
+    public Event toEvent() {
+        return new Event(eventID, associatedUsername, personID, latitude, longitude, country, city, eventType, year);
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public String getassociatedUsername() {
+        return associatedUsername;
+    }
+
+    public void setAssociatedUsername(String associatedUsername) {
+        this.associatedUsername = associatedUsername;
     }
 
     public String getEventID() {

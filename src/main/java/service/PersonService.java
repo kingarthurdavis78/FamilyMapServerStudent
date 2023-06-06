@@ -24,10 +24,10 @@ public class PersonService {
         personAccess.closeConnection(true);
 
         if (person == null) {
-            throw new DataAccessException("Error: Person not found");
+            throw new DataAccessException("Person not found");
         }
         if (!person.getAssociatedUsername().equals(user.getUsername())) {
-            throw new DataAccessException("Error: Person is not associated with this user");
+            throw new DataAccessException("Person is not associated with this user");
         }
 
         return new GetPersonResponse(person.getAssociatedUsername(), person.getPersonID(), person.getFirstName(), person.getLastName(), person.getGender(), person.getFatherID(), person.getMotherID(), person.getSpouseID(), true);
@@ -47,8 +47,8 @@ public class PersonService {
             Person[] family = personAccess.getFamily(username);
             personAccess.closeConnection(true);
 
-            if (family == null) {
-                throw new DataAccessException("Error: No family members found");
+            if (family.length == 0) {
+                throw new DataAccessException("No family members found");
             }
 
             return new GetFamilyResponse(family);

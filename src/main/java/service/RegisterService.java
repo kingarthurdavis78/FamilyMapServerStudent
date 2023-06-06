@@ -25,11 +25,6 @@ public class RegisterService {
         String id = generateID();
         User user = new User(request.getUsername(), request.getPassword(), request.getEmail(), request.getFirstName(), request.getLastName(), request.getGender(), id);
 
-//        FillService fillService = new FillService();
-//        FillResponse fillRes = fillService.fill(user.getUsername());
-//        if (!fillRes.getSuccess()) {
-//            return new RegisterResponse("Error: " + fillRes.getMessage(), false);
-//        }
         UserAccess userAccess = new UserAccess();
         try {
             userAccess.openConnection();
@@ -39,15 +34,22 @@ public class RegisterService {
             LoginService loginService = new LoginService();
             LoginRequest loginRequest = new LoginRequest(user.getUsername(), user.getPassword());
             LoginResponse loginRes = loginService.login(loginRequest);
+
             if (!loginRes.getSuccess()) {
                 return new RegisterResponse(loginRes.getMessage(), false);
             }
 
-            return new RegisterResponse(id, user.getUsername(), user.getPersonID(), true);
+            FillService fillService = new FillService();
+            FillResponse fillRes = fillService.fill(user.getUsername(), 4);
+            if (!fillRes.getSuccess()) {
+                return new RegisterResponse("Error: " + fillRes.getMessage(), false);
+            }
+
+            return new RegisterResponse(loginRes.getAuthtoken(), user.getUsername(), user.getPersonID(), true);
 
         } catch (DataAccessException ex) {
             userAccess.closeConnection(false);
-            return new RegisterResponse(ex.getMessage(), false);
+            return new RegisterResponse("Error: " + ex.getMessage(), false);
         }
     }
 
